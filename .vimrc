@@ -226,3 +226,15 @@ let g:ale_lint_on_enter = 0
 
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
+
+
+" Run prettier-vue on save for .vue files
+fun! PrettierVue()
+  silent write !prettier-vue %
+  edit!
+endfun
+
+autocmd BufWritePre *.vue call PrettierVue()
+
+" Run rpettier on save for all other extensions
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md Prettier

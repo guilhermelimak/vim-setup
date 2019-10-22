@@ -7,9 +7,6 @@ execute pathogen#infect()
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
-colorscheme PaperColor
-set background=light
-
 filetype plugin indent on    " required
 syntax enable
 " set colorcolumn=100
@@ -54,12 +51,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
-
-"save on lose focus
-au FocusLost * :wa
-
-" Fix vim-vue syntax randomly disappearing
-autocmd FileType vue syntax sync fromstart
 
 au BufReadPre //* :NoMatchParen
 
@@ -140,101 +131,9 @@ vnoremap ; l
 "allow . to repeat visual commands
 vnoremap . :norm.<CR>
 
-" ==============
-" == GUI
-" ==============
-if has("gui_running")
-  color sift
-  set noantialias
-  set guioptions-=e
-  set guioptions-=m
-  set guioptions-=T
-  set guioptions-=r
-  set guioptions-=L
-
-  " set guifont=FixedsysTTF\ 12
-  set guifont=Terminus
-
-  hi GitGutterAdd guifg=#338833 guibg=#0c121c
-  hi GitGutterChange guifg=#FFFE07 guibg=#0c121c
-  hi GitGutterChangeDelete guifg=#FFFE07 guibg=#0c121c
-  hi GitGutterDelete guifg=#884444 guibg=#0c121c
-endif
-
-" ==============
-" == Style
-" ==============
-" hi ColorColumn ctermbg=darkgray
-" hi Conditional ctermfg=Yellow
-" hi NonText ctermfg=236
-" hi SpecialKey ctermfg=236
 hi ExtraWhitespace ctermbg=red
-
-" match ExtraWhitespace /\s\+$/
-" function! NumberToggle()
-"   if(&relativenumber == 1)
-"     set norelativenumber
-"   else
-"     set relativenumber
-"   endif
-" endfunc
-
-nnoremap <C-o> :call NumberToggle()<cr>
 
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
-" ==============
-" == Plugins config
-" ==============
-" Typescript
-autocmd FileType typescript nmap <buffer> <Leader>E <Plug>(TsuquyomiRenameSymbol)
-
-" Nerdtree
-nnoremap <leader>n :NERDTreeToggle<CR>
-
-" Vue
-let g:vue_disable_pre_processors=1
-
-" Ctrlp.vim
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
-" LightLine
-let g:lightline = { 'colorscheme': 'wombat' }
-
-" Ale
-" After this is configured, :ALEFix will try and fix your JS code with ESLint.
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\}
-
-" Set this setting in vimrc if you want to fix files automatically on save.
-" This is off by default.
-let g:ale_fix_on_save = 1
-
-" Disable all other linters
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}
-
-" Write this in your vimrc file
-let g:ale_lint_on_text_changed = 'never'
-" You can disable this option too
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 0
-
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-
-
-" Run prettier-vue on save for .vue files
-fun! PrettierVue()
-  silent write !prettier-vue %
-  edit!
-endfun
-
-autocmd BufWritePre *.vue call PrettierVue()
-
-" Run rpettier on save for all other extensions
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md Prettier

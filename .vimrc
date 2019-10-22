@@ -60,18 +60,7 @@ au BufReadPre //* :NoMatchParen
 " ==============
 " Disable autoindent paste
 nnoremap <F2> :set invpaste paste?<CR>
-imap <C-g> <CR><Esc>O<Tab>
-" Map emmet to <C-e>
-imap <C-e> <C-y>,
-
 nmap <leader>ee :lnext<cr>
-
-" Move lines
-nmap <c-l> [e
-nmap <c-k> ]e
-vmap <c-k> ]egv
-vmap <c-l> [egv
-
 "save read only files without reopening vim
 cmap w!! w !sudo tee % >/dev/null
 
@@ -102,9 +91,6 @@ nnoremap <leader>hs :sp<CR>
 nnoremap <leader>vs :vsp<CR>
 nnoremap <leader><leader> :w<CR>
 
-" nnoremap K <Nop>
-" vnoremap K <Nop>
-
 map <Esc><Esc> :w<CR>
 
 " go to tab
@@ -116,18 +102,6 @@ map <leader>5 5gt
 map <leader>6 6gt
 map <leader>7 7gt
 map <leader>8 8gt
-
-"normalmov
-nnoremap j h
-nnoremap k gj
-nnoremap l gk
-nnoremap ; l
-"visualmov
-vnoremap j h
-vnoremap k gj
-vnoremap l gk
-vnoremap ; l
-
 "allow . to repeat visual commands
 vnoremap . :norm.<CR>
 
